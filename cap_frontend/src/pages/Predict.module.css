@@ -1,0 +1,343 @@
+/* Predict.module.css */
+.page {
+    min-height: 100vh;
+    padding: 7rem 0 4rem;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(45, 159, 92, 0.12);
+    border: 1px solid rgba(45, 159, 92, 0.3);
+    color: #4ec97e;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.2rem;
+}
+
+.title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: white;
+    margin-bottom: 0.75rem;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.55);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.65;
+}
+
+/* Form Card */
+.formCard {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 24px;
+    padding: 2.5rem;
+    backdrop-filter: blur(20px);
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.labelHint {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 400;
+    margin-left: auto;
+}
+
+.input {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    transition: all 0.25s ease;
+    outline: none;
+    width: 100%;
+}
+
+.input::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+}
+
+.input:focus {
+    border-color: rgba(45, 159, 92, 0.6);
+    background: rgba(45, 159, 92, 0.05);
+    box-shadow: 0 0 0 3px rgba(45, 159, 92, 0.12);
+}
+
+.inputError {
+    border-color: rgba(255, 80, 80, 0.6) !important;
+}
+
+.errorMsg {
+    font-size: 0.75rem;
+    color: #ff6b6b;
+}
+
+.formActions {
+    margin-top: 1.75rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.submitBtn {
+    flex: 1;
+    background: linear-gradient(135deg, #2d9f5c, #1a7a43);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(45, 159, 92, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+.submitBtn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(45, 159, 92, 0.55);
+}
+
+.submitBtn:active {
+    transform: translateY(0);
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.resetBtn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.resetBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* Spinner */
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin-slow 0.7s linear infinite;
+}
+
+/* Error / API Error */
+.apiError {
+    margin-top: 1.5rem;
+    background: rgba(255, 80, 80, 0.08);
+    border: 1px solid rgba(255, 80, 80, 0.25);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    color: #ff8080;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+/* Result */
+.resultCard {
+    margin-top: 2rem;
+    background: linear-gradient(135deg, rgba(45, 159, 92, 0.15), rgba(26, 122, 67, 0.08));
+    border: 1px solid rgba(45, 159, 92, 0.35);
+    border-radius: 24px;
+    padding: 2.5rem;
+    text-align: center;
+    animation: fadeInUp 0.5s ease;
+}
+
+.resultCropIcon {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 1rem;
+    filter: drop-shadow(0 0 20px rgba(45, 159, 92, 0.4));
+    animation: float 4s ease-in-out infinite;
+    border-radius: 20px;
+}
+
+.resultLabel {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #4ec97e;
+    margin-bottom: 0.5rem;
+}
+
+.resultCrop {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: white;
+    text-transform: capitalize;
+    margin-bottom: 0.5rem;
+}
+
+.resultDesc {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.95rem;
+    max-width: 440px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.6;
+}
+
+.resultMeta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.resultBadge {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.resultAgain {
+    margin-top: 1.5rem;
+    background: rgba(45, 159, 92, 0.12);
+    border: 1.5px solid rgba(45, 159, 92, 0.3);
+    color: #4ec97e;
+    border-radius: 12px;
+    padding: 0.75rem 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.resultAgain:hover {
+    background: rgba(45, 159, 92, 0.2);
+}
+
+/* Tips panel */
+.tips {
+    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.tipsTitle {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.tipsList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.tipItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.5;
+}
+
+.tipItem::before {
+    content: '✓';
+    color: #4ec97e;
+    flex-shrink: 0;
+    font-weight: 700;
+}
+
+@media (max-width: 640px) {
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .formCard {
+        padding: 1.5rem;
+    }
+
+    .formActions {
+        flex-direction: column;
+    }
+
+    .submitBtn {
+        width: 100%;
+    }
+
+    .resetBtn {
+        width: 100%;
+    }
+}
