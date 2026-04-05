@@ -18,7 +18,7 @@
 .badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 6px;
     background: rgba(45, 159, 92, 0.12);
     border: 1px solid rgba(45, 159, 92, 0.3);
     color: #4ec97e;
@@ -52,6 +52,9 @@
     color: white;
     margin-bottom: 1.5rem;
     font-family: 'Syne', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 /* Overview */
@@ -74,6 +77,15 @@
     color: rgba(255, 255, 255, 0.6);
     font-size: 0.95rem;
     line-height: 1.75;
+}
+
+.codeGreen {
+    color: #4ec97e;
+    font-family: monospace;
+}
+
+.modelSection {
+    margin-bottom: 2.5rem;
 }
 
 /* Model Details */
@@ -148,11 +160,18 @@
 .factIcon {
     font-size: 1.2rem;
     flex-shrink: 0;
+    display: flex;
 }
 
 /* Algorithms */
 .algoSection {
     margin-bottom: 2.5rem;
+}
+
+.algoSectionDesc {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.9rem;
+    margin-bottom: 0;
 }
 
 .algoList {
@@ -185,6 +204,9 @@
 
 .algoEmoji {
     font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .algoName {
@@ -221,6 +243,10 @@
     margin-bottom: 2.5rem;
 }
 
+.teamSection .sectionTitle {
+    justify-content: center;
+}
+
 .teamDesc {
     color: rgba(255, 255, 255, 0.55);
     max-width: 560px;
@@ -246,16 +272,35 @@
     color: rgba(255, 255, 255, 0.6);
 }
 
-@media (max-width: 640px) {
+.ctaSection {
+    text-align: center;
+    padding: 1rem 0 2rem;
+}
+
+.btnFlex {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (max-width: 1024px) {
     .overviewGrid {
         grid-template-columns: 1fr;
     }
 
     .modelGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .datasetGrid {
         grid-template-columns: 1fr;
     }
+}
 
-    .datasetGrid {
+@media (max-width: 640px) {
+    .modelGrid {
         grid-template-columns: 1fr;
     }
 

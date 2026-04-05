@@ -1,49 +1,50 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Bot, Globe, Zap, BarChart3, Target, Smartphone, ClipboardList, Thermometer, Sprout, Leaf, Gem, FlaskConical, Droplets, Scale, CloudRain, Sliders, CheckCircle } from 'lucide-react';
 import styles from './Landing.module.css';
 
 const FEATURES = [
-    { icon: '🤖', title: 'AI-Powered Predictions', desc: 'Our Random Forest model trained on 2,200 samples delivers highly accurate crop recommendations in real-time.' },
-    { icon: '🌍', title: 'Global Crop Coverage', desc: 'Supports 22 crop types including cereals, pulses, fruits, and plantation crops across diverse climates.' },
-    { icon: '⚡', title: 'Instant Results', desc: 'Get your crop recommendation in under a second. No waiting, no complexity — just fast, reliable advice.' },
-    { icon: '📊', title: 'Science-Backed Model', desc: 'Built using soil NPK ratios, climate data (temperature, humidity, rainfall) and soil pH for precision.' },
-    { icon: '🎯', title: 'High Accuracy', desc: 'Trained with balanced dataset (100 samples per crop) and validated with multiple ML algorithms.' },
-    { icon: '📱', title: 'Easy to Use', desc: 'Simple, intuitive interface that any farmer or researcher can use — no technical experience needed.' },
+    { icon: Bot, title: 'AI-Powered Predictions', desc: 'Our Random Forest model trained on 2,200 samples delivers highly accurate crop recommendations in real-time.' },
+    { icon: Globe, title: 'Global Crop Coverage', desc: 'Supports 22 crop types including cereals, pulses, fruits, and plantation crops across diverse climates.' },
+    { icon: Zap, title: 'Instant Results', desc: 'Get your crop recommendation in under a second. No waiting, no complexity — just fast, reliable advice.' },
+    { icon: BarChart3, title: 'Science-Backed Model', desc: 'Built using soil NPK ratios, climate data (temperature, humidity, rainfall) and soil pH for precision.' },
+    { icon: Target, title: 'High Accuracy', desc: 'Trained with balanced dataset (100 samples per crop) and validated with multiple ML algorithms.' },
+    { icon: Smartphone, title: 'Easy to Use', desc: 'Simple, intuitive interface that any farmer or researcher can use — no technical experience needed.' },
 ];
 
 const STEPS = [
-    { num: '1', icon: '📋', title: 'Enter Soil Data', desc: 'Input your soil\'s Nitrogen, Phosphorus, and Potassium (NPK) levels from your soil test report.' },
-    { num: '2', icon: '🌡️', title: 'Add Climate Info', desc: 'Enter the temperature, humidity, pH level, and average rainfall for your agricultural area.' },
-    { num: '3', icon: '🤖', title: 'AI Analyzes', desc: 'Our Random Forest model processes your 7 parameters through trained ML classifiers instantly.' },
-    { num: '4', icon: '🌾', title: 'Get Recommendation', desc: 'Receive your personalized crop recommendation with season info, description, and growing tips.' },
+    { num: '1', icon: ClipboardList, title: 'Enter Soil Data', desc: 'Input your soil\'s Nitrogen, Phosphorus, and Potassium (NPK) levels from your soil test report.' },
+    { num: '2', icon: Thermometer, title: 'Add Climate Info', desc: 'Enter the temperature, humidity, pH level, and average rainfall for your agricultural area.' },
+    { num: '3', icon: Bot, title: 'AI Analyzes', desc: 'Our Random Forest model processes your 7 parameters through trained ML classifiers instantly.' },
+    { num: '4', icon: Sprout, title: 'Get Recommendation', desc: 'Receive your personalized crop recommendation with season info, description, and growing tips.' },
 ];
 
 const PARAMS = [
-    { emoji: '🌿', name: 'N', full: 'Nitrogen', range: '0 – 140', unit: 'mg/kg', desc: 'Essential macronutrient for leaf growth' },
-    { emoji: '🪨', name: 'P', full: 'Phosphorus', range: '5 – 145', unit: 'mg/kg', desc: 'Vital for root development & flowering' },
-    { emoji: '⚗️', name: 'K', full: 'Potassium', range: '5 – 205', unit: 'mg/kg', desc: 'Boosts disease resistance & yield' },
-    { emoji: '🌡️', name: 'Temp', full: 'Temperature', range: '8.8 – 43.7', unit: '°C', desc: 'Optimal crop growing temperature' },
-    { emoji: '💧', name: 'Humidity', full: 'Relative Humidity', range: '14 – 100', unit: '%', desc: 'Moisture in the air around crops' },
-    { emoji: '⚖️', name: 'pH', full: 'Soil pH', range: '3.5 – 9.9', unit: '', desc: 'Acid-base balance of your soil' },
-    { emoji: '🌧️', name: 'Rainfall', full: 'Annual Rainfall', range: '20 – 299', unit: 'mm', desc: 'Average precipitation in your region' },
+    { emoji: Leaf, name: 'N', full: 'Nitrogen', range: '0 – 140', unit: 'mg/kg', desc: 'Essential macronutrient for leaf growth' },
+    { emoji: Gem, name: 'P', full: 'Phosphorus', range: '5 – 145', unit: 'mg/kg', desc: 'Vital for root development & flowering' },
+    { emoji: FlaskConical, name: 'K', full: 'Potassium', range: '5 – 205', unit: 'mg/kg', desc: 'Boosts disease resistance & yield' },
+    { emoji: Thermometer, name: 'Temp', full: 'Temperature', range: '8 – 44', unit: '°C', desc: 'Optimal crop growing temperature' },
+    { emoji: Droplets, name: 'Humidity', full: 'Relative Humidity', range: '14 – 100', unit: '%', desc: 'Moisture in the air around crops' },
+    { emoji: Scale, name: 'pH', full: 'Soil pH', range: '3.5 – 10', unit: '', desc: 'Acid-base balance of your soil' },
+    { emoji: CloudRain, name: 'Rainfall', full: 'Annual Rainfall', range: '20 – 299', unit: 'mm', desc: 'Average precipitation in your region' },
 ];
 
 const CROPS = [
-    { name: 'Rice', emoji: '🌾' }, { name: 'Maize', emoji: '🌽' }, { name: 'Jute', emoji: '🌿' },
-    { name: 'Cotton', emoji: '🌸' }, { name: 'Coconut', emoji: '🥥' }, { name: 'Papaya', emoji: '🍈' },
-    { name: 'Orange', emoji: '🍊' }, { name: 'Apple', emoji: '🍎' }, { name: 'Muskmelon', emoji: '🍑' },
-    { name: 'Watermelon', emoji: '🍉' }, { name: 'Grapes', emoji: '🍇' }, { name: 'Mango', emoji: '🥭' },
-    { name: 'Banana', emoji: '🍌' }, { name: 'Pomegranate', emoji: '🌺' }, { name: 'Lentil', emoji: '🫘' },
-    { name: 'Blackgram', emoji: '🫘' }, { name: 'Mungbean', emoji: '🫘' }, { name: 'Mothbeans', emoji: '🫘' },
-    { name: 'Pigeonpeas', emoji: '🫘' }, { name: 'Kidneybeans', emoji: '🫘' }, { name: 'Chickpea', emoji: '🫘' },
-    { name: 'Coffee', emoji: '☕' },
+    { name: 'Rice' }, { name: 'Maize' }, { name: 'Jute' },
+    { name: 'Cotton' }, { name: 'Coconut' }, { name: 'Papaya' },
+    { name: 'Orange' }, { name: 'Apple' }, { name: 'Muskmelon' },
+    { name: 'Watermelon' }, { name: 'Grapes' }, { name: 'Mango' },
+    { name: 'Banana' }, { name: 'Pomegranate' }, { name: 'Lentil', img: 'lentils' },
+    { name: 'Blackgram' }, { name: 'Mungbean', img: 'mungbeans' }, { name: 'Mothbeans' },
+    { name: 'Pigeonpeas', img: 'pigeonpea' }, { name: 'Kidneybeans' }, { name: 'Chickpea' },
+    { name: 'Coffee' },
 ];
 
 const DATA_STATS = [
-    { icon: '📊', num: '2,200', label: 'Training Samples' },
-    { icon: '🌾', num: '22', label: 'Crop Categories' },
-    { icon: '🎛️', num: '7', label: 'Input Parameters' },
-    { icon: '✅', num: '99%+', label: 'Model Accuracy' },
+    { icon: BarChart3, num: '2,200', label: 'Training Samples' },
+    { icon: Sprout, num: '22', label: 'Crop Categories' },
+    { icon: Sliders, num: '7', label: 'Input Parameters' },
+    { icon: CheckCircle, num: '99%+', label: 'Model Accuracy' },
 ];
 
 const FAQS = [
@@ -81,8 +82,8 @@ export default function Landing() {
                             recommend the best crop to maximize your yield and profitability.
                         </p>
                         <div className={styles.heroCtas}>
-                            <Link to="/predict" className="btn-primary">
-                                🌱 Get Recommendation
+                            <Link to="/predict" className={`btn-primary ${styles.btnFlex}`}>
+                                <Sprout size={18} /> Get Recommendation
                             </Link>
                             <a href="#how-it-works" className="btn-outline">
                                 How It Works ↓
@@ -105,9 +106,9 @@ export default function Landing() {
                     </div>
                     <div className={styles.heroVisual}>
                         <div className={styles.heroCard}>
-                            <div className={styles.floatBadge}>🤖 AI Model</div>
+                            <div className={styles.floatBadge}><Bot size={14} /> AI Model</div>
                             <div className={styles.heroCardHeader}>
-                                <div className={styles.heroCardIcon}>🌱</div>
+                                <div className={styles.heroCardIcon}><Sprout size={24} color="#4ec97e" /></div>
                                 <div>
                                     <div className={styles.heroCardTitle}>Soil Analysis</div>
                                     <div className={styles.heroCardSub}>7 parameters analyzed</div>
@@ -134,7 +135,9 @@ export default function Landing() {
                             <div className={styles.heroResult}>
                                 <div>
                                     <div className={styles.heroResultLabel}>Recommended Crop</div>
-                                    <div className={styles.heroResultCrop}>🌾 Rice</div>
+                                    <div className={styles.heroResultCrop}>
+                                        <img src="/crop-icons/rice.png" alt="Rice" className={styles.heroResultCropImg} /> Rice
+                                    </div>
                                 </div>
                                 <div className={styles.heroResultConf}>99.2%</div>
                             </div>
@@ -156,7 +159,7 @@ export default function Landing() {
                     <div className={styles.featuresGrid}>
                         {FEATURES.map((f) => (
                             <div key={f.title} className={styles.featureCard}>
-                                <div className={styles.featureIcon}>{f.icon}</div>
+                                <div className={styles.featureIcon}><f.icon size={28} /></div>
                                 <h3 className={styles.featureTitle}>{f.title}</h3>
                                 <p className={styles.featureDesc}>{f.desc}</p>
                             </div>
@@ -178,7 +181,7 @@ export default function Landing() {
                     <div className={styles.stepsGrid}>
                         {STEPS.map((s) => (
                             <div key={s.num} className={styles.step}>
-                                <div className={styles.stepNum}>{s.icon}</div>
+                                <div className={styles.stepNum}><s.icon size={24} /></div>
                                 <h3 className={styles.stepTitle}>{s.title}</h3>
                                 <p className={styles.stepDesc}>{s.desc}</p>
                             </div>
@@ -200,11 +203,11 @@ export default function Landing() {
                     <div className={styles.paramsGrid}>
                         {PARAMS.map((p) => (
                             <div key={p.name} className={styles.paramCard}>
-                                <div className={styles.paramEmoji}>{p.emoji}</div>
-                                <div className={styles.paramName}>{p.name} {p.unit && <span style={{ color: 'rgba(255,255,255,0.35)', fontWeight: 400, fontSize: '0.75rem' }}>({p.unit})</span>}</div>
+                                <div className={styles.paramEmoji}><p.emoji size={28} color="#4ec97e" /></div>
+                                <div className={styles.paramName}>{p.name} {p.unit && <span className={styles.paramUnit}>({p.unit})</span>}</div>
                                 <div className={styles.paramFull}>{p.full}</div>
                                 <div className={styles.paramRange}>Range: {p.range}</div>
-                                <p style={{ marginTop: '0.6rem', fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>{p.desc}</p>
+                                <p className={styles.paramDescText}>{p.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -224,7 +227,9 @@ export default function Landing() {
                     <div className={styles.cropsScroll}>
                         {CROPS.map((c) => (
                             <div key={c.name} className={styles.cropChip}>
-                                <span className={styles.cropEmoji}>{c.emoji}</span>
+                                <span className={styles.cropEmoji}>
+                                    <img src={`/crop-icons/${c.img || c.name.toLowerCase()}.png`} alt={c.name} className={styles.cropImageLg} />
+                                </span>
                                 <span className={styles.cropName}>{c.name}</span>
                             </div>
                         ))}
@@ -245,7 +250,7 @@ export default function Landing() {
                     <div className={styles.statsGrid}>
                         {DATA_STATS.map((s) => (
                             <div key={s.label} className={styles.statCard}>
-                                <div className={styles.statCardIcon}>{s.icon}</div>
+                                <div className={styles.statCardIcon}><s.icon size={32} /></div>
                                 <div className={styles.statCardNum}>{s.num}</div>
                                 <div className={styles.statCardLabel}>{s.label}</div>
                             </div>
@@ -289,8 +294,8 @@ export default function Landing() {
                             Enter your soil and climate data now and discover which crop will give you the best yield.
                         </p>
                         <div className={styles.ctaBtns}>
-                            <Link to="/predict" className="btn-primary">
-                                🌾 Start Free Prediction
+                            <Link to="/predict" className={`btn-primary ${styles.btnFlex}`}>
+                                <Sprout size={18} /> Start Free Prediction
                             </Link>
                             <Link to="/about" className="btn-outline">
                                 Learn More

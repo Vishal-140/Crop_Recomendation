@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { predictCrop } from '../services/api';
+import { Leaf, MountainSnow, FlaskConical, Thermometer, Droplets, Scale, CloudRain, BrainCircuit, TreePine, BarChart3, CheckCircle, RefreshCw, Sparkles, Lightbulb } from 'lucide-react';
 import styles from './Predict.module.css';
 
 const INITIAL_FORM = { N: '', P: '', K: '', temperature: '', humidity: '', ph: '', rainfall: '' };
 
 const FIELDS = [
-    { key: 'N', label: '🌿 Nitrogen (N)', hint: '0 – 140', placeholder: 'e.g. 90', unit: 'mg/kg' },
-    { key: 'P', label: '🪨 Phosphorus (P)', hint: '5 – 145', placeholder: 'e.g. 42', unit: 'mg/kg' },
-    { key: 'K', label: '⚗️ Potassium (K)', hint: '5 – 205', placeholder: 'e.g. 43', unit: 'mg/kg' },
-    { key: 'temperature', label: '🌡️ Temperature', hint: '8.8 – 43.7', placeholder: 'e.g. 20.8', unit: '°C' },
-    { key: 'humidity', label: '💧 Humidity', hint: '14 – 100', placeholder: 'e.g. 82', unit: '%' },
-    { key: 'ph', label: '⚖️ Soil pH', hint: '3.5 – 9.9', placeholder: 'e.g. 6.5', unit: '' },
-    { key: 'rainfall', label: '🌧️ Rainfall', hint: '20 – 299', placeholder: 'e.g. 202.9', unit: 'mm' },
+    { key: 'N', label: 'Nitrogen (N)', hint: '0 – 140', placeholder: 'e.g. 90', unit: 'mg/kg', icon: Leaf },
+    { key: 'P', label: 'Phosphorus (P)', hint: '5 – 145', placeholder: 'e.g. 42', unit: 'mg/kg', icon: MountainSnow },
+    { key: 'K', label: 'Potassium (K)', hint: '5 – 205', placeholder: 'e.g. 43', unit: 'mg/kg', icon: FlaskConical },
+    { key: 'temperature', label: 'Temperature', hint: '8 – 44', placeholder: 'e.g. 20.8', unit: '°C', icon: Thermometer },
+    { key: 'humidity', label: 'Humidity', hint: '14 – 100', placeholder: 'e.g. 82', unit: '%', icon: Droplets },
+    { key: 'ph', label: 'Soil pH', hint: '3.5 – 10', placeholder: 'e.g. 6.5', unit: '', icon: Scale },
+    { key: 'rainfall', label: 'Rainfall', hint: '20 – 299', placeholder: 'e.g. 202.9', unit: 'mm', icon: CloudRain },
 ];
 
 export default function Predict() {
@@ -50,8 +51,13 @@ export default function Predict() {
             setResult(data);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (err) {
-            const msg = err.response?.data?.error || err.response?.data?.message || 'Failed to get prediction. Is the backend running?';
-            setError(msg);
+            const data = err.response?.data;
+            if (data?.details && Array.isArray(data.details)) {
+                setError(`Validation error: ${data.details.join(', ')}`);
+            } else {
+                const msg = data?.error || data?.message || 'Failed to get prediction. Is the backend running?';
+                setError(msg);
+            }
         } finally {
             setLoading(false);
         }
@@ -68,7 +74,7 @@ export default function Predict() {
         <div className={styles.page}>
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <div className={styles.badge}>🌱 ML-Powered Prediction</div>
+                    <div className={styles.badge}><BrainCircuit size={14} /> ML-Powered Prediction</div>
                     <h1 className={styles.title}>
                         Get Your <span className="gradient-text">Crop Recommendation</span>
                     </h1>
@@ -85,17 +91,20 @@ export default function Predict() {
                             alt={result.crop}
                             className={styles.resultCropIcon}
                         />
-                        <div className={styles.resultLabel}>Recommended Crop</div>
-                        <div className={styles.resultCrop}>{result.crop}</div>
-                        <div className={styles.resultMeta}>
-                            <span className={styles.resultBadge}>🤖 Random Forest Model</span>
-                            <span className={styles.resultBadge}>📊 Trained on 2,200 samples</span>
-                            <span className={styles.resultBadge}>✅ Dataset-validated</span>
+                        <div className={styles.resultTextWrap}>
+                            <div className={styles.resultLabel}>RECOMMENDED CROP</div>
+                            <div className={styles.resultCrop}>{result.crop}</div>
+                            
+                            <div className={styles.resultMeta}>
+                                <span className={styles.resultBadge}><TreePine size={14} /> Random Forest Model</span>
+                                <span className={styles.resultBadge}><BarChart3 size={14} /> Trained on 2,200 samples</span>
+                                <span className={styles.resultBadge}><CheckCircle size={14} /> Dataset-validated</span>
+                            </div>
+                            
+                            <button className={styles.resultAgain} onClick={handleReset}>
+                                <RefreshCw size={18} /> Try Another Prediction
+                            </button>
                         </div>
-                        <br />
-                        <button className={styles.resultAgain} onClick={handleReset}>
-                            🔄 Try Another Prediction
-                        </button>
                     </div>
                 )}
 
@@ -104,10 +113,10 @@ export default function Predict() {
                     <div className={styles.formCard}>
                         <form onSubmit={handleSubmit} noValidate>
                             <div className={styles.formGrid}>
-                                {FIELDS.map(({ key, label, hint, placeholder }) => (
+                                {FIELDS.map(({ key, label, hint, placeholder, icon: Icon }) => (
                                     <div key={key} className={styles.inputGroup}>
                                         <label className={styles.label} htmlFor={key}>
-                                            {label}
+                                            <span className={styles.labelIcon}><Icon size={16} /> {label}</span>
                                             <span className={styles.labelHint}>{hint}</span>
                                         </label>
                                         <input
@@ -133,7 +142,7 @@ export default function Predict() {
 
                             <div className={styles.formActions}>
                                 <button type="submit" className={styles.submitBtn} disabled={loading}>
-                                    {loading ? <><div className={styles.spinner} /> Analyzing...</> : '🌿 Predict Best Crop'}
+                                    {loading ? <><div className={styles.spinner} /> Analyzing...</> : <><Sparkles size={18} /> Predict Best Crop</>}
                                 </button>
                                 <button type="button" className={styles.resetBtn} onClick={handleReset}>
                                     Reset
@@ -146,7 +155,7 @@ export default function Predict() {
                 {/* Tips */}
                 {!result && (
                     <div className={styles.tips}>
-                        <div className={styles.tipsTitle}>💡 Tips for Accurate Results</div>
+                        <div className={styles.tipsTitle}><Lightbulb size={20} color="#ffdd57" /> Tips for Accurate Results</div>
                         <ul className={styles.tipsList}>
                             <li className={styles.tipItem}>Get soil NPK values from a certified soil testing laboratory for your region.</li>
                             <li className={styles.tipItem}>Use average temperature and humidity for the main growing season, not daily extremes.</li>

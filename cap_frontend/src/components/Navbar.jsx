@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { Sprout, Leaf } from 'lucide-react';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -15,7 +16,7 @@ export default function Navbar() {
         <header className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`}>
             <div className={styles.inner}>
                 <Link to="/" className={styles.logo}>
-                    <div className={styles.logoIcon}>🌾</div>
+                    <div className={styles.logoIcon}><Sprout size={24} color="#4ec97e" /></div>
                     <span className={styles.logoText}>Crop<span>Sense</span> AI</span>
                 </Link>
                 <nav className={styles.nav}>
@@ -36,7 +37,7 @@ export default function Navbar() {
                         to="/predict"
                         className={({ isActive }) => `${styles.navLink} ${styles.navCta} ${isActive ? styles.active : ''}`}
                     >
-                        🌱 Try Now
+                        <Leaf size={16} /> Try Now
                     </NavLink>
                 </nav>
             </div>

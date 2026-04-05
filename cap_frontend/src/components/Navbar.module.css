@@ -99,12 +99,22 @@
     box-shadow: 0 4px 15px rgba(45, 159, 92, 0.35);
     font-weight: 600 !important;
     font-size: 0.92rem !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .navCta:hover {
     background: rgba(255, 255, 255, 0.1) !important;
     transform: translateY(-1px);
     box-shadow: 0 6px 20px rgba(45, 159, 92, 0.5);
+}
+
+@media (max-width: 1024px) {
+    .navLink {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+    }
 }
 
 @media (max-width: 640px) {

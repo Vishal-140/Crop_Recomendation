@@ -111,7 +111,6 @@
     border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.statItem {}
 
 .statNum {
     font-family: 'Syne', sans-serif;
@@ -230,9 +229,15 @@
     font-size: 1.1rem;
     font-weight: 700;
     color: white;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 8px;
+}
+
+.heroResultCropImg {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
 }
 
 .heroResultConf {
@@ -256,6 +261,9 @@
     padding: 0.35rem 0.8rem;
     border-radius: 999px;
     box-shadow: 0 4px 15px rgba(240, 165, 0, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
 /* ====== FEATURES ====== */
@@ -456,6 +464,7 @@
 }
 
 .paramEmoji {
+    display: flex;
     font-size: 1.8rem;
     margin-bottom: 0.75rem;
 }
@@ -485,6 +494,19 @@
     font-weight: 600;
 }
 
+.paramUnit {
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 400;
+    font-size: 0.75rem;
+}
+
+.paramDescText {
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.5;
+}
+
 /* ====== CROPS SHOWCASE ====== */
 .cropsSection {
     padding: 6rem 0;
@@ -506,6 +528,10 @@
     text-align: center;
     transition: all 0.3s ease;
     cursor: default;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .cropChip:hover {
@@ -516,14 +542,23 @@
 
 .cropEmoji {
     font-size: 1.8rem;
-    display: block;
-    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.8rem;
+}
+
+.cropImageLg {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.4));
 }
 
 .cropName {
-    font-size: 0.78rem;
+    font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.65);
-    font-weight: 500;
+    font-weight: 600;
     text-transform: capitalize;
 }
 
@@ -556,6 +591,8 @@
 .statCardIcon {
     font-size: 2rem;
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
 }
 
 .statCardNum {
@@ -702,6 +739,12 @@
     position: relative;
 }
 
+.btnFlex {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
 /* ====== FOOTER ====== */
 .footer {
     padding: 2rem 0;
@@ -720,6 +763,34 @@
 
 /* ====== RESPONSIVE ====== */
 @media (max-width: 1024px) {
+    .heroInner {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+        text-align: center;
+    }
+
+    .heroCtas {
+        justify-content: center;
+    }
+
+    .heroStats {
+        justify-content: center;
+    }
+
+    .heroSubtitle {
+        margin: 0 auto 2.5rem;
+    }
+
+    .heroTitle {
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        max-width: 600px;
+        margin: 0 auto 1.5rem;
+    }
+
+    .ctaBox {
+        padding: 3rem 1.5rem;
+    }
+
     .featuresGrid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -738,26 +809,8 @@
 }
 
 @media (max-width: 768px) {
-    .heroInner {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        text-align: center;
-    }
-
-    .heroCtas {
-        justify-content: center;
-    }
-
-    .heroStats {
-        justify-content: center;
-    }
-
-    .heroSubtitle {
-        margin: 0 auto 2.5rem;
-    }
-
-    .heroVisual {
-        order: -1;
+    .heroTitle {
+        font-size: clamp(1.8rem, 7vw, 2.2rem);
     }
 
     .stepsGrid {
@@ -774,6 +827,11 @@
 }
 
 @media (max-width: 480px) {
+    .heroTitle {
+        font-size: 1.4rem;
+        line-height: 1.2;
+    }
+
     .featuresGrid {
         grid-template-columns: 1fr;
     }
