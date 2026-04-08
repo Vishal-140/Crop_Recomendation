@@ -15,6 +15,34 @@ const FIELDS = [
     { key: 'rainfall', label: 'Rainfall', hint: '20 – 299', placeholder: 'e.g. 202.9', unit: 'mm', icon: CloudRain },
 ];
 
+const getDynamicDescription = (crop, params) => {
+    const templates = {
+        rice: `With your high rainfall (${params.rainfall}mm) and humidity (${params.humidity}%), Rice is perfectly suited for your water-rich environment.`,
+        maize: `Your optimal temperature (${params.temperature}°C) and Phosphorus level (${params.P}) make Maize an excellent choice for a healthy cereal harvest.`,
+        jute: `Your high humidity (${params.humidity}%) and rainfall (${params.rainfall}mm) are the exact 'Golden Fiber' conditions Jute needs to thrive.`,
+        cotton: `With a Nitrogen level of ${params.N} and your warm temperature of ${params.temperature}°C, your land is ideal for high-quality Cotton growth.`,
+        coconut: `Your tropical humidity (${params.humidity}%) and high rainfall (${params.rainfall}mm) provide the perfect long-term environment for a successful Coconut plantation.`,
+        papaya: `Given your warm climate (${params.temperature}°C) and consistent moisture, Papaya will flourish in your nutrient-rich soil.`,
+        orange: `Your sub-tropical temperature (${params.temperature}°C) and moderate Rainfall (${params.rainfall}mm) are ideal for developing juicy, high-quality Oranges.`,
+        apple: `The cool temperature of ${params.temperature}°C in your region is exactly what Apple trees need for a productive fruiting season.`,
+        muskmelon: `Your high temperature (${params.temperature}°C) and dry-air humidity (${params.humidity}%) are perfect for developing exceptionally sweet Muskmelons.`,
+        watermelon: `With plenty of sun and your specific temperature range of ${params.temperature}°C, Watermelon will grow large and sweet in your sandy-loam soil.`,
+        grapes: `Your region's temperature (${params.temperature}°C) and specific Soil pH of ${params.ph} are excellent for establishing a high-yield vineyard.`,
+        mango: `As a tropical crop, Mango will thrive in your ${params.temperature}°C climate and benefit from your balanced Soil pH of ${params.ph}.`,
+        banana: `Your high humidity (${params.humidity}%) and consistent heat (${params.temperature}°C) provide the lush environment Bananas need to produce massive yields.`,
+        pomegranate: `Your Soil pH of ${params.ph} and moderate Rainfall (${params.rainfall}mm) are perfect for this hardy, drought-tolerant Pomegranate crop.`,
+        lentil: `Your Nitrogen-rich soil (${params.N}) and cool temperature (${params.temperature}°C) make Lentils a perfect nitrogen-fixing choice for your land.`,
+        blackgram: `With a Potassium level of ${params.K} and optimized temperature, Blackgram is an excellent short-duration crop for your soil.`,
+        mungbean: `Your specific Rainfall (${params.rainfall}mm) and temperature conditions are perfectly suited for fast-growing and drought-tolerant Mungbeans.`,
+        mothbeans: `In your arid environment with ${params.humidity}% humidity, Mothbeans are the most resilient and productive choice for your land.`,
+        pigeonpeas: `Your Soil pH (${params.ph}) and heat-tolerant climate (${params.temperature}°C) make Pigeonpeas a sturdy and high-protein recommendation.`,
+        kidneybeans: `With your specific Potassium level (${params.K}) and temperate humidity, Kidneybeans will flourish in your balanced soil.`,
+        chickpea: `Your cool temperature (${params.temperature}°C) and low Rainfall (${params.rainfall}mm) mimic the ideal 'rabi' season conditions Chickpeas love.`,
+        coffee: `Your high-altitude humidity (${params.humidity}%) and consistent Rainfall (${params.rainfall}mm) provide the premium mist-covered environment Coffee thrives in.`
+    };
+    return templates[crop.toLowerCase()] || "This crop is highly recommended based on your soil and climate data.";
+};
+
 export default function Predict() {
     const [form, setForm] = useState(INITIAL_FORM);
     const [result, setResult] = useState(null);
@@ -95,6 +123,10 @@ export default function Predict() {
                             <div className={styles.resultLabel}>RECOMMENDED CROP</div>
                             <div className={styles.resultCrop}>{result.crop}</div>
                             
+                            <p className={styles.resultDesc}>
+                                {getDynamicDescription(result.crop, form)}
+                            </p>
+
                             <div className={styles.resultMeta}>
                                 <span className={styles.resultBadge}><TreePine size={14} /> Random Forest Model</span>
                                 <span className={styles.resultBadge}><BarChart3 size={14} /> Trained on 2,200 samples</span>
@@ -113,11 +145,14 @@ export default function Predict() {
                     <div className={styles.formCard}>
                         <form onSubmit={handleSubmit} noValidate>
                             <div className={styles.formGrid}>
-                                {FIELDS.map(({ key, label, hint, placeholder, icon: Icon }) => (
+                                {FIELDS.map(({ key, label, hint, placeholder, unit, icon: Icon }) => (
                                     <div key={key} className={styles.inputGroup}>
                                         <label className={styles.label} htmlFor={key}>
-                                            <span className={styles.labelIcon}><Icon size={16} /> {label}</span>
-                                            <span className={styles.labelHint}>{hint}</span>
+                                            <span className={styles.labelIcon}>
+                                                <Icon size={16} /> {label}
+                                                {unit && <span className={styles.labelUnit}>({unit})</span>}
+                                            </span>
+                                            <span className={styles.labelHint}>Range: {hint}</span>
                                         </label>
                                         <input
                                             id={key}

@@ -32,10 +32,12 @@
 }
 
 .title {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.1rem, 6vw, 3rem);
     font-weight: 800;
     color: white;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    overflow-wrap: break-word;
+    letter-spacing: -0.05em;
 }
 
 .subtitle {
@@ -83,10 +85,21 @@
 }
 
 .labelHint {
-    font-size: 0.72rem;
-    color: rgba(255, 255, 255, 0.3);
-    font-weight: 400;
+    background: rgba(45, 159, 92, 0.12);
+    border: 1px solid rgba(45, 159, 92, 0.2);
+    color: #4ec97e;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 600;
     margin-left: auto;
+}
+
+.labelUnit {
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 400;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
 }
 
 .input {
@@ -256,11 +269,12 @@
 }
 
 .resultDesc {
-    color: rgba(255, 255, 255, 0.55);
-    font-size: 0.95rem;
-    max-width: 440px;
-    margin: 0 auto 1.5rem;
-    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 0 1.5rem;
+    line-height: 1.7;
+    font-weight: 450;
 }
 
 .resultMeta {

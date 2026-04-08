@@ -45,7 +45,7 @@ export default function About() {
                         About <span className="gradient-text">CropSense AI</span>
                     </h1>
                     <p className={styles.subtitle}>
-                        A Machine Learning-powered crop recommendation system built as a Semester 7 Capstone Project.
+                        A Machine Learning-powered crop recommendation system built as a Capstone Project.
                         It uses soil and climate data to predict the best crop to grow, achieving 99%+ accuracy.
                     </p>
                 </div>

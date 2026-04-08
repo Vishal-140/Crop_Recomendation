@@ -1,12 +1,16 @@
 # CropSense AI - Crop Recommendation System
 
+### Live Project Links
+- **Live Demo**: [https://cropsense-crop-recommendation.vercel.app](https://cropsense-crop-recommendation.vercel.app)
+- **API Endpoint**: [https://cropsense-api-wjbv.onrender.com/api/health](https://cropsense-api-wjbv.onrender.com/api/health)
+
 ## Project Overview
 CropSense AI is a full-stack application designed to recommend the most suitable crop for a given set of soil and climate parameters. It utilizes a Machine Learning model (Random Forest) trained on a dataset of 2,200 samples across 22 different crop types. The system features a modern, responsive user interface built with React and a robust backend powered by Node.js and Python.
 
 ## Key Features
 - **AI-Powered Recommendations**: Uses a scikit-learn Random Forest model for high-accuracy crop suggestions.
 - **Modern UI/UX**: Implements a sleek glassmorphism design with a dark theme.
-- **Full Responsiveness**: Optimized for desktops, tablets (iPad Air/Pro), and smartphones.
+- **Full Responsiveness**: Optimized for desktops, tablets/iPads, and smartphones.
 - **Secure Deployment**: Configured with environment variables and secure CORS policies.
 
 ## Tech Stack
